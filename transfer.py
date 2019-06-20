@@ -47,3 +47,38 @@ def loadImage(path, maxSize=400, shape=None):
     image = transform(image)[:3,:,:].unsqueeze(0)
     
     return image
+
+def getFeatures(image, model, layers=None):
+    """
+    run a image forward and get features from the model
+    """
+    if layers is None:
+        # match the layer number with the layer label as the paper states
+        layers = {
+            '0': 'conv1_1',
+            '5': 'conv2_1',
+            '10': 'conv3_1',
+            '19': 'conv4_1',
+            '21': 'conv4_2', # content representation
+            '28': 'conv5_1'
+        }
+    
+    features = {}
+    x = image
+    for name, layer in model._modules.item():
+        x = layer(x)
+        if name in layers:
+            features[layers[name]] = x 
+    
+    return features 
+
+def gramMatrix(tensor):
+    """
+    calculate the gram matrix of a given tensor
+    """
+    batchSize, depth, height, width = tensor.size()
+    tensor = tensor.view(depth, height*width)
+    res = torch.mm(tensor, tensor.t())
+    return res 
+
+
