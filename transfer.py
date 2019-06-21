@@ -48,6 +48,27 @@ def loadImage(path, maxSize=400, shape=None):
     
     return image
 
+content = loadImage('content/wi_mendota.jpg').to(device)
+style = loadImage('style/vg_night.jpg', shape=content.shape[-2:]).to(device)
+
+def imgConvert(tensor):
+    """
+    convert tensor image to Numpy image for display
+    """
+    image = tensor.to("cpu").clone().detach()
+    image = image.numpy().squeeze()
+    image = image.transpose(1, 2, 0)
+    image = image * np.array((0.229, 0.224, 0.225)) + np.array((0.485, 0.456, 0.406))
+    image = image.clip(0, 1)
+    
+    return image
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(20, 10))
+ax1.imshow(imgConvert(content))
+ax2.imshow(imgConvert(style))
+plt.show()
+print("Hello")
+
 def getFeatures(image, model, layers=None):
     """
     run a image forward and get features from the model
