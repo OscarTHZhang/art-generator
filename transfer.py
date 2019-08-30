@@ -17,6 +17,7 @@ for param in vgg.parameters():
 
 # load the model to CPU / GPU
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+print(device)
 vgg.to(device)
 
 # print(vgg)
@@ -33,7 +34,7 @@ def loadImage(path, maxSize=400, shape=None):
     else:
         image = Image.open(path).convert("RGB")
     
-    # sizing the image
+    # sizing the image if the image is too large to be processed
     if max(image.size) > maxSize:
         size = maxSize
     else:
@@ -48,8 +49,8 @@ def loadImage(path, maxSize=400, shape=None):
     
     return image
 
-content = loadImage('content/wi_mendota.jpg').to(device)
-style = loadImage('style/vg_night.jpg', shape=content.shape[-2:]).to(device)
+content = loadImage('content/resize/mendota_deck_resize.jpg').to(device)
+style = loadImage('style/resize/starry_night_resize.jpg', shape=content.shape[-2:]).to(device)
 
 def imgConvert(tensor):
     """
@@ -63,11 +64,14 @@ def imgConvert(tensor):
     
     return image
 
+figure_count = 1
+
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(20, 10))
 ax1.imshow(imgConvert(content))
 ax2.imshow(imgConvert(style))
-plt.show()
+plt.figure(figure_count)
 print("Hello")
+figure_count += 1
 
 def getFeatures(image, model, layers=None):
     """
@@ -86,7 +90,7 @@ def getFeatures(image, model, layers=None):
     
     features = {}
     x = image
-    for name, layer in model._modules.item():
+    for name, layer in model._modules.items():
         x = layer(x)
         if name in layers:
             features[layers[name]] = x 
@@ -102,4 +106,60 @@ def gramMatrix(tensor):
     res = torch.mm(tensor, tensor.t())
     return res 
 
+# get content and style features
+content_features = getFeatures(content, vgg)
+style_features = getFeatures(style, vgg)
+
+# get the gram matrix for each layer
+style_grams = {layer: gramMatrix(style_features[layer]) for layer in style_features}
+
+target = content.clone().requires_grad_(True).to(device)
+
+style_weights = {'conv1_1': 1.0,
+                 'conv2_1': 0.75,
+                 'conv3_1': 0.2,
+                 'conv4_1': 0.2,
+                 'conv5_1': 0.2}
+
+# alpha and beta
+content_weight = 1 
+style_weight = 1e6 
+
+# updating target and calculating losses for each iteration
+
+frequency = 400 # frequency of showing the transferring result
+
+optimizer = optim.Adam([target], lr=0.003)
+steps = 2000
+
+for ii in range(1, steps + 1):
+    
+    target_features = getFeatures(target, vgg)
+    content_loss = torch.mean((target_features['conv4_2'] - content_features['conv4_2']) ** 2)
+    
+    style_loss = 0
+    
+    for layer in style_weights:
+        
+        target_feature = target_features[layer]
+        target_gram = gramMatrix(target_feature)
+        _, d, h, w = target_feature.shape
+        style_gram = style_grams[layer]
+        layer_style_loss = style_weights[layer] * torch.mean((target_gram - style_gram) ** 2)
+        style_loss += layer_style_loss / (d * h * w)
+        
+    total_loss = content_weight * content_loss + style_weight * style_loss
+    
+    # update target image
+    optimizer.zero_grad()
+    total_loss.backward()
+    optimizer.step()
+    
+    if ii % frequency == 0:
+        print('Total losee: ', total_loss.item())
+        plt.figure(figure_count)
+        plt.imshow(imgConvert(target))
+        figure_count += 1
+
+plt.show()
 
