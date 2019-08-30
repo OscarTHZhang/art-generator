@@ -28,3 +28,15 @@ Halifax + End of Summer
     <img width="800" src="result/city_in_red.png">
 </p>
 Completely change the original style from cold color to warm color. Consider a successful experiment.
+
+## Experiment 3
+Golden Gate Bridge + a random colorful painting
+
+<p>
+    <img width="800" src="result/golden_gate.png">
+</p>
+
+Nice color on the bridge but the sky is a little strange
+
+## Next Step
+Shell scripts to use this
