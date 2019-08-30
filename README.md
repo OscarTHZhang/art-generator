@@ -4,11 +4,15 @@
 This is a demo for the style transfer using CNN. I will update this repo in this summer randomly. The full application will be a click cmd application. <br />
 
 ## Experiment 0
-Lake Mendota Deck + Starry Night <br />
+Lake Mendota Deck + Starry Night
 
+<p align="center">
+    <img width="400" height="200" src="result/mendota_starry_night_original.png">
+</p>
 
-![original](result/mendota_starry_night_original.png)
-![result](result/lake_mendota_with_starry_night.png)
+<p align="center">
+    <img width="400" height="200" src="result/lake_mendota_with_starry_night.png">
+</p>
 
 
 ## More Experiements
