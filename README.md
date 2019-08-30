@@ -25,6 +25,6 @@ Texture is very strange and coloring is also zigzagged.
 Halifax + End of Summer
 
 <p align="center">
-    <img width="400" src="result/city_in_red.png">
+    <img width="800" src="result/city_in_red.png">
 </p>
 Completely change the original style from cold color to warm color. Consider a successful experiment.
