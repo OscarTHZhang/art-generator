@@ -7,7 +7,7 @@ This is a demo for the style transfer using CNN. I will update this repo in this
 Lake Mendota Deck + Starry Night
 
 <p align="center">
-    <img width="300" src="result/mendota_starry_night_original.png">
+    <img width="500" src="result/mendota_starry_night_original.png">
 </p>
 
 <p align="center">
