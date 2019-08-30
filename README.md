@@ -7,13 +7,10 @@ This is a demo for the style transfer using CNN. I will update this repo in this
 Lake Mendota Deck + Starry Night
 
 <p align="center">
-    <img width="500" src="result/mendota_starry_night_original.png">
+    <img width="400" src="result/mendota_deck_with_starry_night.png">
 </p>
 
-<p align="center">
-    <img width="300"src="result/lake_mendota_with_starry_night.png">
-</p>
+VGG Net + Adam with 2000 back propagation steps
 
-
-## More Experiements
-Coming soon!
+## Experiment 1
+Lake Mendota Deck + Sunflowers

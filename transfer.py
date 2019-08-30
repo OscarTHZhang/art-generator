@@ -64,14 +64,11 @@ def imgConvert(tensor):
     
     return image
 
-figure_count = 1
-
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(20, 10))
+fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(20, 10))
 ax1.imshow(imgConvert(content))
 ax2.imshow(imgConvert(style))
-plt.figure(figure_count)
-print("Hello")
-figure_count += 1
+
+
 
 def getFeatures(image, model, layers=None):
     """
@@ -156,10 +153,10 @@ for ii in range(1, steps + 1):
     optimizer.step()
     
     if ii % frequency == 0:
-        print('Total losee: ', total_loss.item())
-        plt.figure(figure_count)
-        plt.imshow(imgConvert(target))
-        figure_count += 1
+        print('Total loss: ', total_loss.item())
+        if ii == steps:
+            ax3.imshow(imgConvert(target))
 
+plt.figure()
 plt.show()
 
