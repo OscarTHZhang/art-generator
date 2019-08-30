@@ -1,7 +1,7 @@
 # Art Generator
 
 ## Intro
-This is a demo for the style transfer using CNN. I will update this repo in this summer randomly. The full application will be a click cmd application. <br />
+This is a demo for the style transfer using CNN. I will update this repo in this summer randomly. The full program will be based on shell script. <br />
 
 ## Experiment 0
 Lake Mendota Deck + Starry Night
