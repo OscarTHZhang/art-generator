@@ -20,3 +20,11 @@ Camila Cabello + Mona Lisa
 </p>
 
 Texture is very strange and coloring is also zigzagged.
+
+## Experiment 2
+Halifax + End of Summer
+
+<p align="center">
+    <img width="400" src="result/city_in_red.png">
+</p>
+Completely change the original style from cold color to warm color. Consider a successful experiment.
