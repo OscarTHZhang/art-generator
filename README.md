@@ -10,7 +10,13 @@ Lake Mendota Deck + Starry Night
     <img width="400" src="result/mendota_deck_with_starry_night.png">
 </p>
 
-VGG Net + Adam with 2000 back propagation steps
+Good texture with similar coloring
 
 ## Experiment 1
-Lake Mendota Deck + Sunflowers
+Camila Cabello + Mona Lisa
+
+<p align="center">
+    <img width="400" src="result/Camila_with_Mona_Lisa.png">
+</p>
+
+Texture is very strange and coloring is also zigzagged.

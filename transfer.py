@@ -49,8 +49,8 @@ def loadImage(path, maxSize=400, shape=None):
     
     return image
 
-content = loadImage('content/resize/mendota_deck_resize.jpg').to(device)
-style = loadImage('style/resize/starry_night_resize.jpg', shape=content.shape[-2:]).to(device)
+content = loadImage('content/resize/camila_resize.jpg').to(device)
+style = loadImage('style/resize/mona_lisa_resize.jpg', shape=content.shape[-2:]).to(device)
 
 def imgConvert(tensor):
     """
