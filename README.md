@@ -7,7 +7,7 @@ This is a demo for the style transfer using CNN. I will update this repo in this
 Lake Mendota Deck + Starry Night
 
 <p align="center">
-    <img width="400" src="result/mendota_deck_with_starry_night.png">
+    <img width="800" src="result/mendota_deck_with_starry_night.png">
 </p>
 
 Good texture with similar coloring
